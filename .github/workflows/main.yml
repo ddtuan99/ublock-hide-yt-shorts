@@ -1,0 +1,53 @@
+name: Sync fork with upstream
+
+on:
+  schedule:
+    - cron: '0 */12 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: custom
+          fetch-depth: 0
+
+      - name: Configure Git Identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Add upstream remote
+        run: |
+          git remote add upstream https://github.com/i5heu/ublock-hide-yt-shorts.git
+          git fetch upstream master
+
+      - name: Try to merge
+        id: merge
+        run: |
+          if git merge upstream/master -m "Merge upstream changes"; then
+            git push origin custom
+          else
+            git merge --abort
+            echo "status=conflict" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create PR in case merge conflict
+        if: steps.merge.outputs.status == 'conflict'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git branch -f sync-upstream-master upstream/master
+          git push -f origin sync-upstream-master
+          gh pr create \
+            --base custom \
+            --head sync-upstream-master \
+            --title "Merge upstream updates (Conflicts Detected)" \
+            --body "Automated sync failed due to conflicts. Please resolve conflicts manually." \
+            || true
