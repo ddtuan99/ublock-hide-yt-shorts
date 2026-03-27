@@ -25,7 +25,7 @@ www.youtube.com##:matches-path(/^(?!\/feed\/history).*$/)ytd-rich-section-render
 www.youtube.com##:matches-path(/^(?!\/feed\/history).*$/)ytd-reel-shelf-renderer:has(.ytd-reel-shelf-renderer:has-text(/(^| )Shorts( |$)/i))
 
 ! Hide shorts tab on channel pages
-www.youtube.com##yt-tab-shape:has-text(/^Shorts$/)
+!www.youtube.com##yt-tab-shape:has-text(/^Shorts$/)
 
 ! Hide short remixes in video descriptions and in suggestions beside the comments
 www.youtube.com##ytd-reel-shelf-renderer:has(#title:has-text(/(^| )Shorts.?Remix.*$/i))
@@ -35,10 +35,10 @@ www.youtube.com##ytd-reel-shelf-renderer:has(#title:has-text(/(^| )Shorts.?Remix
 !!!!!!!!!!!!!!
 
 ! Hide shorts button in the bottom navigation bar
-m.youtube.com##ytm-pivot-bar-item-renderer:has(.pivot-shorts)
+!m.youtube.com##ytm-pivot-bar-item-renderer:has(.pivot-shorts)
 
 ! Hide shorts tab on channel pages 
-m.youtube.com##yt-tab-shape:has-text(/^Shorts$/)
+!m.youtube.com##yt-tab-shape:has-text(/^Shorts$/)
 
 ! Hide shorts sections except on history page
 m.youtube.com##:matches-path(/^(?!\/feed\/history).*$/)ytm-rich-section-renderer:has(.yt-core-attributed-string:has-text(/(^| )Shorts( |$)/i))
