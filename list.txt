@@ -12,6 +12,7 @@ www.youtube.com##ytd-rich-section-renderer:has(a[href^="/shorts/"])
 
 ! Hide on search page
 www.youtube.com##ytd-search grid-shelf-view-model:has(a[href^="/shorts/"])
+www.youtube.com##ytd-search ytd-video-renderer:has(a[href^="/shorts/"])
 ! Hide shorts search tab of search results 
 www.youtube.com##yt-chip-cloud-chip-renderer:has(*:has-text(/^Shorts$/i))
 
@@ -51,4 +52,5 @@ m.youtube.com##ytm-reel-shelf-renderer:has(.reel-shelf-title-wrapper .yt-core-at
 m.youtube.com##ytm-chip-cloud-chip-renderer:has(.yt-core-attributed-string:has-text(/^Shorts$/i))
 
 ! Hide shorts sections on search page
-m.youtube.com##ytm-reel-shelf-renderer:has(ytm-shorts-lockup-view-model)
+m.youtube.com##grid-shelf-view-model:has(ytm-shorts-lockup-view-model)
+m.youtube.com##ytm-video-with-context-renderer:has(.big-shorts-singleton)
